@@ -102,9 +102,11 @@ from sklearn.impute import SimpleImputer
 
 # In[ ]:
 
-
-from google.colab import drive
-drive.mount('/content/drive', force_remount=True)
+try:
+    from google.colab import drive
+    drive.mount('/content/drive', force_remount=True)
+except Exception as e:
+    pass
 
 
 # In[1]:
