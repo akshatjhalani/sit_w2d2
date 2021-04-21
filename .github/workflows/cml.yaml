@@ -11,12 +11,13 @@ jobs:
 
       - name: Validate workflows
         run: |
-          echo "Downloading Data"
-          wget "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
-          echo "Data Downloaded"
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
           echo "Directory structure completed"
+          echo "Downloading Data"
+          wget -O data-breast-cancer.csv "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
+          mv data-breast-cancer.csv /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
+          echo "Data Downloaded"
           sudo apt-get install build-essential swig
           curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
           pip install -r requirements.txt
@@ -25,3 +26,6 @@ jobs:
           pip3 install -U scikit-learn
           ls -lh
           python src/train.py
+          cat metrics.txt >> report.md
+          cml-publish confusion_matrix.png --md >> report.md
+          cml-send-comment report.md

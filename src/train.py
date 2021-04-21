@@ -8,7 +8,7 @@
 # <p style="margin-bottom:1cm;"></p>
 # <center style="color:#303030"><h4>Propulsion Academy, 2021</h4></center>
 # <p style="margin-bottom:1cm;"></p>
-# 
+#
 # <div style="background:#EEEDF5;border-top:0.1cm solid #EF475B;border-bottom:0.1cm solid #EF475B;">
 #     <div style="margin-left: 0.5cm;margin-top: 0.5cm;margin-bottom: 0.5cm">
 #         <p><strong>Goal:</strong> Binary classification on Breast Cancer data</p>
@@ -22,8 +22,8 @@
 #         <strong>Topics Trained:</strong> Binary Classification.
 #     </div>
 # </div>
-# 
-# 
+#
+#
 # <nav style="text-align:right"><strong>
 #         <a style="color:#00BAE5" href="https://monolith.propulsion-home.ch/backend/api/momentum/materials/intro-2-ds-materials/" title="momentum"> SIT Introduction to Data Science</a>|
 #         <a style="color:#00BAE5" href="https://monolith.propulsion-home.ch/backend/api/momentum/materials/intro-2-ds-materials/weeks/week2/day1/index.html" title="momentum">Week 2 Day 1, Applied Machine Learning</a>|
@@ -96,6 +96,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LogisticRegression
 from sklearn.impute import SimpleImputer
+from sklearn.metrics import plot_confusion_matrix
 
 
 # Connect to Google Drive
@@ -134,7 +135,7 @@ set_config(display='diagram')
 
 # <a id='P1' name="P1"></a>
 # ## [Loading Data and Train-Test Split](#P0)
-# 
+#
 
 # **Load the csv file as a DataFrame using Pandas**
 
@@ -150,7 +151,7 @@ df['diagnosis']=df['diagnosis'].map({'M':1, 'B':0})
 # In[ ]:
 
 
-df = df.drop(["Unnamed: 32", "id"], axis=1) 
+df = df.drop(["Unnamed: 32", "id"], axis=1)
 
 
 # In[ ]:
@@ -240,6 +241,12 @@ y_pred = automl.predict(x_test)
 
 logging.info(f"Accuracy is {accuracy_score(y_test, y_pred)}, \n F1 score is {f1_score(y_test, y_pred)}")
 
+with open("metrics.txt", 'w') as outfile:
+    outfile.write(f"Accuracy is {accuracy_score(y_test, y_pred)}, \n F1 score is {f1_score(y_test, y_pred)}")
+
+disp = plot_confusion_matrix(automl, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
+plt.savefig('confusion_matrix.png')
+
 
 # #### Model Explainability
 
@@ -260,7 +267,7 @@ x_test.iloc[x_idx:x_idx+1,:]
 shap.initjs()
 shap.force_plot(base_value = explainer.expected_value,
                 shap_values = shap_value_single,
-                features = x_test.iloc[x_idx:x_idx+1,:], 
+                features = x_test.iloc[x_idx:x_idx+1,:],
                 show=False,
                 matplotlib=True
                 )
