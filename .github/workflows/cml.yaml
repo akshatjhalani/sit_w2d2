@@ -13,6 +13,7 @@ jobs:
         run: |
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
+          sudo chmod -R 777 /content
           echo "Directory structure completed"
           echo "Downloading Data"
           wget -O data-breast-cancer.csv "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
