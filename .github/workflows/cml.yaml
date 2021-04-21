@@ -7,8 +7,6 @@ jobs:
      steps:
         - uses: actions/checkout@v2
         - name: cml_run
-           env:
-              repo_token: ${{ secrets.GITHUB_TOKEN }}
            run: |
               echo "Downloading Data"
               wget "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
