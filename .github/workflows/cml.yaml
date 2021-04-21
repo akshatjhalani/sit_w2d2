@@ -21,6 +21,7 @@ jobs:
           curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
           pip install -r requirements.txt
           pip install --upgrade plotly
+          pip install pandas-profiling
           pip3 install -U scikit-learn
-          ls
+          ls -lh
           python src/train.py
