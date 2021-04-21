@@ -14,6 +14,6 @@ jobs:
           echo "Downloading Data"
           wget "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
           echo "Data Downloaded"
-          mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
-          mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
+          sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
+          sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
           echo "Directory structure completed"
