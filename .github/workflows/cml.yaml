@@ -17,3 +17,10 @@ jobs:
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
           sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
           echo "Directory structure completed"
+          sudo apt-get install build-essential swig
+          curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
+          pip install -r requirements.txt
+          pip install --upgrade plotly
+          pip3 install -U scikit-learn
+          ls
+          python src/train.py
