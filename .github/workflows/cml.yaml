@@ -25,8 +25,8 @@ jobs:
           pip install --upgrade plotly
           pip install pandas-profiling
           pip3 install -U scikit-learn
-          ls -lh
           python src/train.py
+          ls -lh
           cat metrics.txt >> report.md
           cml-publish confusion_matrix.png --md >> report.md
           cml-send-comment report.md
