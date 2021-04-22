@@ -245,7 +245,7 @@ with open("metrics.txt", 'w') as outfile:
     outfile.write(f"Accuracy is {accuracy_score(y_test, y_pred)}, \n F1 score is {f1_score(y_test, y_pred)}")
 
 print("Metrics Saved")
-disp = plot_confusion_matrix(automl.predict, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
+disp = plot_confusion_matrix(automl, x_test, y_test, normalize='true',cmap=plt.cm.Blues)
 plt.savefig('confusion_matrix.png')
 print("Confusion_matrix Saved")
 
