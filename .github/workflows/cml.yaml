@@ -1,0 +1,36 @@
+name: Validate Data
+
+on:
+  push:
+
+jobs:
+  validate-model:
+    runs-on: ubuntu-latest
+    container: docker://dvcorg/cml-py3:latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate workflows
+        env:
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
+          sudo mkdir -p /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/models/
+          sudo chmod -R 777 /content
+          echo "Directory structure completed"
+          echo "Downloading Data"
+          wget -O data-breast-cancer.csv "https://drive.google.com/uc?export=download&id=1n5eXzMnf_Jztkky7ZmzfUq2QHWpD6LUN"
+          sudo mv data-breast-cancer.csv /content/drive/MyDrive/Introduction2DataScience/W2D2_Assignment/w2d2/data/raw/
+          echo "Data Downloaded"
+          sudo apt-get update
+          sudo apt-get install build-essential swig python3-dev
+          curl https://raw.githubusercontent.com/automl/auto-sklearn/master/requirements.txt | xargs -n 1 -L 1 pip install
+          pip install -r requirements.txt
+          pip install --upgrade plotly
+          pip install pandas-profiling
+          pip3 install -U scikit-learn
+          python src/train.py
+          ls -lh
+          cat metrics.txt >> report.md
+          cml-publish confusion_matrix.png --md >> report.md
+          cml-send-comment report.md
