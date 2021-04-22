@@ -6,6 +6,7 @@ on:
 jobs:
   validate-model:
     runs-on: ubuntu-latest
+    container: docker://dvcorg/cml-py3:latest
     steps:
       - uses: actions/checkout@v2
 
